@@ -7,6 +7,7 @@ func main() {
 	for _, v :=range s{
 		go func(v string) {
 			fmt.Println(v)
+			fmt.println("hello world")
 		}(v)
 	}
 	select {
