@@ -1,0 +1,24 @@
+api_server:
+  port: 12151
+  # jwt相关
+  token_expire: 7200 # jwt过期时间
+  jwt_sign: chainmaker_v1_nft # jwtsign
+  jwt_issue_user: system
+  sdk_path: ./config_files/sdk_config.yml
+
+  
+log:
+  log_in_console: true         # 是否展示日志到终端，仅限于调试使用
+  show_color: true              # 是否打印颜色日志
+  log_level: Debug 
+  log_path: ./log/Dapp.log
+
+store_mysql:
+  user_name: root
+  password: 123456
+  db_address: 127.0.0.1:3306 #oracle_db:3306 #127.0.0.1:3306
+  database: mysql
+  max_open: 10
+  max_idle: 10
+  max_idle_seconds: 180
+  max_life_seconds: 1800 
