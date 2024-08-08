@@ -1,0 +1,90 @@
+syntax = "proto3";
+
+option go_package = "./;pb";
+
+package pb;
+
+import "google/protobuf/timestamp.proto";
+
+service StreamService {
+    rpc MessageStream (stream Message) returns (stream Message) {}
+}
+
+message Message {
+
+    // The signature of public key
+    bytes signature = 1;
+
+    // The address of source member who sent this message first
+    string proposer = 2;
+
+    // The address of sender member who sent this message
+    string sender = 3;
+
+    // The time when the source sends
+    google.protobuf.Timestamp timestamp = 4;
+
+    // message's epoch
+    uint64 epoch = 5;
+
+    oneof payload {
+        RBC rbc = 6;
+        BBA bba = 7;
+        CE ce = 8;
+        DecShare ds = 9;
+    }
+}
+
+message RBC {
+
+    // marshaled data by type
+    bytes payload = 1;
+
+    // The length of original data
+    uint64 contentLength = 2;
+
+    // isIndexRbc
+    bool isIndexRbc = 3;
+
+    // payload type
+    enum Type {
+        VAL = 0;
+        ECHO = 1;
+        READY = 2;
+    }
+    Type type = 4;
+}
+
+message BBA {
+
+    // marshaled data by type
+    bytes payload = 1;
+
+    // each epoch's BBA round, it is different with epoch
+    uint64 round = 2;
+
+    // payload type
+    enum Type {
+        BVAL = 0;
+        AUX = 1;
+        MAIN_VOTE = 2;
+        FINAL_VOTE = 3;
+        // FIXME 暂时将 COIN_SIG_SHARE 类型放到BA中
+        COIN_SIG_SHARE = 4;
+    }
+    Type type = 3;
+}
+
+message CE {
+    // CE payload
+    bytes payload = 1;
+    // CE消息的类型表示，SHARE表示为份额消息
+    enum Type {
+        SHARE = 0;
+    }
+    Type type = 2;
+}
+
+message DecShare {
+    bytes payload = 1;
+}

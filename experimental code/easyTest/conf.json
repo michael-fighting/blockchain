@@ -1,0 +1,25 @@
+{
+  "mainChain": {
+    "byzantine": 0,
+    "batchSize": 272,
+    "committeeSize": 1
+  },
+  "branches": [
+    {
+      "byzantine": 1,
+      "batchSize": 7680,
+      "committeeSize": 3,
+      "nodes": [
+        "10.186.11.41",
+        "10.186.11.41",
+        "10.186.11.41",
+        "10.186.11.41",
+        "10.186.11.41",
+        "10.186.11.41"
+      ]
+    }
+  ]
+}
+
+
+
